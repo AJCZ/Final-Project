@@ -1,8 +1,3 @@
-
-# coding: utf-8
-
-# In[1]:
-
 def cleanfile(text, interviewee):
     import string
     contractions = { 
@@ -125,16 +120,18 @@ def cleanfile(text, interviewee):
     "you've": "you have"
     }
     punct=set(string.punctuation)
-    words = text.split("gumb:")
-    del words[0]
-    words = "gumb:".join(words).split(interviewee+":")
+    words = text.split(":")
+    interviewer=words[0]
     wordsclean=[]
-    for i in range(len(words)):
-        wordsclean.append(words[i].split("gumb:")[0])
+    for i in range(len(words)-1):
+        if words[i].split(" ")[-1]==interviewee:
+            wordsclean.append(words[i+1]) 
     words=[]
-    for i in range(len(wordsclean)):
-        if i%2==1:
-            words.append(wordsclean[i])
+    for i in range(len(wordsclean)-1):
+        temp=wordsclean[i].split(" ")
+        del temp[-1]
+        words.append(" ".join(temp))
+    words.append(wordsclean[-1])
     for i in range(len(words)):
         words[i]=words[i].strip() 
     text = " ".join(words)
@@ -144,6 +141,7 @@ def cleanfile(text, interviewee):
     text=textclean.strip()
 
     text=text.replace("97401","'")
+    text=text.replace(interviewer, "")
     words=text.split(" ")
     for i in range (len(words)):
         if words[i] in contractions:
@@ -171,99 +169,3 @@ def cleanfile(text, interviewee):
     text=[x for x in text if x!=""]
     textclean=' '.join(x for x in text if x not in stop)
     return textclean
-
-
-# In[ ]:
-
-
-
-
-# In[2]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
-
-# In[ ]:
-
-
-
