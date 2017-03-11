@@ -126,46 +126,49 @@ def cleanfile(text, interviewee):
     for i in range(len(words)-1):
         if words[i].split(" ")[-1]==interviewee:
             wordsclean.append(words[i+1]) 
-    words=[]
-    for i in range(len(wordsclean)-1):
-        temp=wordsclean[i].split(" ")
-        del temp[-1]
-        words.append(" ".join(temp))
-    words.append(wordsclean[-1])
-    for i in range(len(words)):
-        words[i]=words[i].strip() 
-    text = " ".join(words)
+    if len(wordsclean)!=0:
+        words=[]
+        for i in range(len(wordsclean)-1):
+            temp=wordsclean[i].split(" ")
+            del temp[-1]
+            words.append(" ".join(temp))
+        words.append(wordsclean[-1])
+        for i in range(len(words)):
+            words[i]=words[i].strip() 
+        text = " ".join(words)
 
-    text=text.replace("'","97401")
-    textclean=''.join(x for x in text if x not in punct)
-    text=textclean.strip()
+        text=text.replace("'","97401")
+        textclean=''.join(x for x in text if x not in punct)
+        text=textclean.strip()
 
-    text=text.replace("97401","'")
-    text=text.replace(interviewer, "")
-    words=text.split(" ")
-    for i in range (len(words)):
-        if words[i] in contractions:
-            words[i]=contractions[words[i]]
-            words[i]=words[i].strip()
+        text=text.replace("97401","'")
+        text=text.replace(interviewer, "")
+        words=text.split(" ")
+        for i in range (len(words)):
+            if words[i] in contractions:
+                words[i]=contractions[words[i]]
+                words[i]=words[i].strip()
 
-    text = " ".join(words)
-    text=''.join([x for x in text if not x.isdigit()])
+        text = " ".join(words)
+        text=''.join([x for x in text if not x.isdigit()])
 
-    wordsnew=[]
-    words=text.split(" ")
-    for i in range (len(words)):
-        if words[i]!='':
-            wordsnew.append(words[i])
+        wordsnew=[]
+        words=text.split(" ")
+        for i in range (len(words)):
+            if words[i]!='':
+                wordsnew.append(words[i])
 
-    text=' '.join(wordsnew)
-    textclean=''.join(x for x in text if x not in punct)
-    text=textclean.strip()
-    saveforlater=text
-    import nltk
-    from nltk.corpus import stopwords
-    nltk.download("stopwords")
-    stop = set(stopwords.words('english'))
-    text=text.split(" ")
-    text=[x for x in text if x!=""]
-    textclean=' '.join(x for x in text if x not in stop)
-    return textclean
+        text=' '.join(wordsnew)
+        textclean=''.join(x for x in text if x not in punct)
+        text=textclean.strip()
+        saveforlater=text
+        import nltk
+        from nltk.corpus import stopwords
+        nltk.download("stopwords")
+        stop = set(stopwords.words('english'))
+        text=text.split(" ")
+        text=[x for x in text if x!=""]
+        textclean=' '.join(x for x in text if x not in stop)
+        return textclean
+    else:
+        return ''
