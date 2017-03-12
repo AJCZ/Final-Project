@@ -1,4 +1,6 @@
 def cleanfile(text, interviewee):
+    from nltk import PorterStemmer
+    from nltk.tokenize import sent_tokenize, word_tokenize
     import string
     contractions = { 
     "ain't": "am not; are not; is not; has not; have not",
@@ -169,6 +171,12 @@ def cleanfile(text, interviewee):
         text=text.split(" ")
         text=[x for x in text if x!=""]
         textclean=' '.join(x for x in text if x not in stop)
+        ## stemming
+        ps = PorterStemmer()
+        temp=textclean.split()
+        for i in range (len(temp)):
+            temp[i]=ps.stem(temp[i])
+        textclean=' '.join(temp)
         return textclean
     else:
         return ''
