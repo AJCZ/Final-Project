@@ -2,6 +2,7 @@ def cleanfile(text, interviewee):
     from nltk import PorterStemmer
     from nltk.tokenize import sent_tokenize, word_tokenize
     import string
+    #defining a dictionary of contractions
     contractions = { 
     "ain't": "am not; are not; is not; has not; have not",
     "aren't": "are not; am not",
@@ -125,53 +126,61 @@ def cleanfile(text, interviewee):
     words = text.split(":")
     interviewer=words[0]
     wordsclean=[]
+    #picking out words by interviewee only
     for i in range(len(words)-1):
         if words[i].split(" ")[-1]==interviewee:
             wordsclean.append(words[i+1]) 
     if len(wordsclean)!=0:
         words=[]
+        #taking out extra names that appear at the end of each interviewer's content
         for i in range(len(wordsclean)-1):
             temp=wordsclean[i].split(" ")
             del temp[-1]
             words.append(" ".join(temp))
         words.append(wordsclean[-1])
+        #stripping out of extra wgite spaces
         for i in range(len(words)):
             words[i]=words[i].strip() 
         text = " ".join(words)
-
+        #substitute temporarily ' by 97401 to avoid destroying contractions
         text=text.replace("'","97401")
+        #taking out punctuations except for the ' that have been substituted by 97401
         textclean=''.join(x for x in text if x not in punct)
         text=textclean.strip()
-
+        #substitute back ' to where they appear
         text=text.replace("97401","'")
+        #taking out interviewer names in case any left
         text=text.replace(interviewer, "")
         words=text.split(" ")
+        #taking out contractions
         for i in range (len(words)):
             if words[i] in contractions:
                 words[i]=contractions[words[i]]
                 words[i]=words[i].strip()
-
+        #taking out numbers/digits
         text = " ".join(words)
         text=''.join([x for x in text if not x.isdigit()])
-
+        #taking out extra white spaces
         wordsnew=[]
         words=text.split(" ")
         for i in range (len(words)):
             if words[i]!='':
                 wordsnew.append(words[i])
-
+        #taking out punctuations, specifically ' that are not a part of a contraction
         text=' '.join(wordsnew)
         textclean=''.join(x for x in text if x not in punct)
         text=textclean.strip()
         saveforlater=text
+        #downloading stop word list
         import nltk
         from nltk.corpus import stopwords
         nltk.download("stopwords")
+        #taking out stop words
         stop = set(stopwords.words('english'))
         text=text.split(" ")
         text=[x for x in text if x!=""]
         textclean=' '.join(x for x in text if x not in stop)
-        ## stemming
+        ##stemming every word
         ps = PorterStemmer()
         temp=textclean.split()
         for i in range (len(temp)):
