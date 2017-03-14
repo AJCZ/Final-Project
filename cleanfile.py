@@ -176,6 +176,8 @@ def cleanfile(text, interviewee):
         temp=textclean.split()
         for i in range (len(temp)):
             temp[i]=ps.stem(temp[i])
+            if(temp[i]==' '):
+                temp[i]=''
         textclean=' '.join(temp)
         return textclean
     else:
