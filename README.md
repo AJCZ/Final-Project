@@ -50,6 +50,7 @@ To distinguish interviewees, I generated a .xls file (keys.xls) which contains i
 ## Project and PIC 10C
 
 Unlike C++, Python has a build-in "garbage cleaning" mechanism that frees up memory. Still, I was inspired by PIC 10C in following ways:
-    * "Try catch" (try/except in python)" was implemented in **ngramanalysis.py** not to manage memory but to catch ill-formed transcripts. Many immigrants are registered twice on the Ellis Island Foundation website (most commonly an immigrant is registered one time with her lastname and then a second time with her maiden name). Try catch throws an error message to alert me which transcripts are not compatible with algorithm written in **cleanfile.py**. I was able to fix these errors by going to these transcripts and identify what crashed my program.
-    * Originally I was planning on write separate n-gram generating algorithms and analysis algorithms for singletons/bigrams/trigrams. Eventually, I genericized both algorithms to take an arbituary integer and generate results, which proved to be much more efficient.
+* "Try catch" (try/except in python)" was implemented in **ngramanalysis.py** not to manage memory but to catch ill-formed transcripts. Many immigrants are registered twice on the Ellis Island Foundation website (most commonly an immigrant is registered one time with her lastname and then a second time with her maiden name). Try catch throws an error message to alert me which transcripts are not compatible with algorithm written in **cleanfile.py**. I was able to fix these errors by going to these transcripts and identify what crashed my program.
+
+* Originally I was planning on write separate n-gram generating algorithms and analysis algorithms for singletons/bigrams/trigrams. Eventually, I genericized both algorithms to take an arbituary integer and generate results, which proved to be much more efficient.
 
