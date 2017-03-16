@@ -32,14 +32,15 @@ Language: Python _**(all codes were written in Ipython Notebook)**_
 
 I chose python for this project for its convenient libraries that are used for text analysis.
 
-Utilizing the 960 transcripts that are available on the Ellis Island Foundation website, this project charaterizes the common experiences of immigrants who came to the United States during this period of time. Specifically, this projects generates the 1000 most common meaningful singletons (single words), bigrams (two adjacent words), and trigrams (three adjacent words) from the transcripts available. The function written can also be used to generate and analyze n-grams (n>=1).
+Utilizing the 960 transcripts that are available on the Ellis Island Foundation website, this project charaterizes the common experiences of immigrants who came to the United States between 1892 and 1954. Specifically, this project generates the 1000 most common meaningful singletons (single words), bigrams (two adjacent words), and trigrams (three adjacent words) from the transcripts available. The function written can also be used to generate and analyze n-grams (n>=1).
 
 ### Preparation for Coding
-Firstly, all 960 transcripts were downloaded from the Ellis Island Foundation Website. As the website does not provide an option to download all transcripts at once, all transcripts were copied and pasted by hand then saved into a .txt file. They are stored in folder "Transcript."
-To distinguish interviewees, I generated a .xls file (keys.xls) which contains interviewees' lastnames and corrsponding identifier numbers. Transcript text files are named the same as the identifier number.
+Firstly, all 960 transcripts were downloaded from the Ellis Island Foundation Website. As the website does not provide an option to download all transcripts at once, all transcripts were copied and pasted by hand then saved into a .txt file. They are stored in the folder "Transcript."
+
+To distinguish interviewees, I generated a .xls file (**keys.xls**) which contains interviewees' lastnames and their corresponding identifier numbers. Transcript text files are named the same as the identifier number.
 
 ### Algorithm
-**cleanfile.py** takes two string variables, first of which being raw trascript and second of which being the lastname of interviewee. This function filters out content that is not from the interviewee, takes out numbers, punctuations, and expands contractions (e.g. "it's"). Before returning, the function stems every word using the Porter Stemmer. So words of the same root would be counted as the same "word" in analysis. Then the function returns a cleaned transcript as a string variable.
+**cleanfile.py** takes two string variables, first of which being the raw trascript and second of which being the lastname of interviewee. This function filters out content that is not from the interviewee, takes out numbers, punctuations, and expands contractions (e.g. "it's"). Before returning, the function stems every word using the Porter Stemmer. So words of the same root would be counted as the same "word" in analysis. Then the function returns a cleaned transcript as a string variable.
 
 **genngram** is a generic function that takes two arguments, one string variable and one integer n, and generates a list of n-grams from the text passed in.
 
